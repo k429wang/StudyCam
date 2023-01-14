@@ -1,7 +1,12 @@
-def leftframe(faces):
+# import time
+def leftframe(faces, time):
     if (type(faces) == tuple):
-        print("where r u")
+        # if (time.time() - time > 5):
+        #     print("where r u")
+        # if (counter == 20):
+        # print(":)")
         return True
     else:
-        print(faces)
+        #counter = 0
+        # print(faces)
         return False
