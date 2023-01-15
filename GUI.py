@@ -14,6 +14,7 @@ class MainWindow(QWidget):
         layout = QVBoxLayout()
         self.setLayout(layout)
         
+
         self.startstop = QPushButton("Start")
         self.startstop.clicked.connect(self.updateStartStop)
         layout.addWidget(self.startstop)
@@ -22,17 +23,18 @@ class MainWindow(QWidget):
         self.drinkwater.clicked.connect(self.updateDrinkWater)
         layout.addWidget(self.drinkwater)
 
-        pause = QPushButton("Pause")
-        layout.addWidget(pause)
+        #pause = QPushButton("Data")
+        #layout.addWidget(pause)
 
     def updateStartStop(self):
-        videocapture.flip() #flipping on the back-end 
         
-        #visual front -end stuff
+    
         if (self.startstop.text() == "Start"):
             videocapture.backend()
             self.startstop.setText("Stop")
         else:
+            
+            
             self.startstop.setText("Start")
     
     def updateDrinkWater(self):
@@ -43,7 +45,6 @@ class MainWindow(QWidget):
 
 app = QApplication(sys.argv)
 window = MainWindow()
-
 window.show()
 
 sys.exit(app.exec())
