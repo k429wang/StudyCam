@@ -9,17 +9,19 @@ face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 cap = cv2.VideoCapture(0)
 
 
-global isStudying 
-global currentSession
+
 isStudying = False
 
 startPressed = True #will be bound to GUI button later, set to True for testing
 def main():
-    
+    global isStudying 
+    global currentSession
     currentSession = database.StudySession()
     currentSession.startTime = time.time()
     if startPressed: #start button pressed
         isStudying = True
+    
+    
         
     Studying(currentSession, currentSession.getStartTime())
     
@@ -29,11 +31,14 @@ def main():
     #exitting loop means stop pressed-> need to reset varriables and track data
     AFKcouner = 0
 def Studying(currentSession, start_time): #once study session is started (start button pressed)
+    global isStudying 
+
+    
     session = database.StudySession()
     session = currentSession
     
     AFKcounter= 0
-    while True: #isStudying:
+    while isStudying:
         
         # Read the frame
         _, img = cap.read()
