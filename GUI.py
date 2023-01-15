@@ -1,4 +1,5 @@
 import sys
+#hi sydney
 
 from PyQt6.QtCore import QSize, Qt
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget
@@ -23,7 +24,6 @@ class MainWindow(QWidget):
         pause = QPushButton("Pause")
         layout.addWidget(drinkwater)
         layout.addWidget(pause)
-
 
         # startstop.move(50,50)
         # drinkwater.move(250,50)
