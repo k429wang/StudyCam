@@ -16,23 +16,24 @@ face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 # To capture video from webcam. 
 cap = cv2.VideoCapture(0)
 
-isStudying = True
 
 
 
-def main():
-    global isStudying #boolean to test if in session
+
+def backend():
+    isStudying = True
+    #global isStudying #boolean to test if in session
     global currentSession
     currentSession = database.StudySession() #__init__
     
 
     #GUI.showingWindow()
     
-    while isStudying:
-        Studying(currentSession, currentSession.getStartTime())
-        currentSession.finished(AFKcounter) 
-        currentSession.output()#testing purposes: outputs data to terminal 
-    
+   
+    Studying(currentSession, currentSession.getStartTime())
+    currentSession.finished(AFKcounter) 
+    currentSession.output()#testing purposes: outputs data to terminal 
+        
     # Release the VideoCapture object
     cap.release()
     cv2.destroyAllWindows()
@@ -47,15 +48,15 @@ def Studying(currentSession, start_time): #once study session is started (start 
     session = currentSession
     
     AFKcounter = 0 
-    x = 5
+    x = 3
     timeout = time.time() + x
     
     
     toggle = False #toggles between gone and not gone. When we go from True(gone) to False(present), AFK counter goes up
-    while isStudying:
+    while True:
         if time.time()>timeout:
         #timer for testing - simulates someone pressing stop after x seconds (will be swapped to button later so dw about this)
-            isStudying=False#stop studying loop
+           break#stop studying loop
              
         watervalue = 1800 #1800 Seconds = reminder every 30m to drink water
         if (int((time.time())+1) % watervalue == 0):
@@ -107,5 +108,5 @@ def _ss_value(): #pass isStudying val
     return isStudying
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

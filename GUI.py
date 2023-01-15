@@ -24,16 +24,14 @@ class MainWindow(QWidget):
         self.drinkwater.clicked.connect(self.updateDrinkWater)
         layout.addWidget(self.drinkwater)
 
-        pause = QPushButton("Pause")
-        layout.addWidget(pause)
+        #pause = QPushButton("Data")
+        #layout.addWidget(pause)
 
     def updateStartStop(self):
-        videocapture.flip() #flipping on the back-end 
-        print(videocapture._ss_value())
-        #visual front -end stuff
+        
+    
         if (self.startstop.text() == "Start"):
-            while videocapture._ss_value():
-                videocapture.backend()
+            videocapture.backend()
             self.startstop.setText("Stop")
         else:
             
@@ -45,9 +43,9 @@ class MainWindow(QWidget):
             self.drinkwater.setText("Drink Water Alarm is set! Click again to reset.")
         else: 
             self.drinkwater.setText("Drink Water Alarm is off")
-def showingWindow():
-    app = QApplication(sys.argv)
-    window = MainWindow()
-    window.show()
 
-    sys.exit(app.exec())
+app = QApplication(sys.argv)
+window = MainWindow()
+window.show()
+
+sys.exit(app.exec())
