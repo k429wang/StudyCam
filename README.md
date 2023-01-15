@@ -1,6 +1,6 @@
 # StudyCam
 
-Created by Sabrina Punjani, Kai Wang, Marwan Ali, and Sydney Sochaj
+Created by Sabrina Punjani, Kai Wang, Marwan Ali, and Sydney Sochaj at **Delta Hacks 9**
 
 ## Inspiration
 
