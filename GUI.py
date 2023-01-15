@@ -1,8 +1,8 @@
 import sys
 
 from PyQt6.QtWidgets import QApplication, QPushButton, QVBoxLayout, QWidget
-#from layout_colorwidget import Color
 import videocapture
+
 # Subclass QMainWindow to customize your application's main window
 class MainWindow(QWidget):
     
@@ -13,7 +13,6 @@ class MainWindow(QWidget):
 
         layout = QVBoxLayout()
         self.setLayout(layout)
-        
 
         self.startstop = QPushButton("Start")
         self.startstop.clicked.connect(self.updateStartStop)
@@ -23,18 +22,12 @@ class MainWindow(QWidget):
         self.drinkwater.clicked.connect(self.updateDrinkWater)
         layout.addWidget(self.drinkwater)
 
-        #pause = QPushButton("Data")
-        #layout.addWidget(pause)
-
     def updateStartStop(self):
-        
-    
+
         if (self.startstop.text() == "Start"):
             videocapture.backend()
             self.startstop.setText("Stop")
         else:
-            
-            
             self.startstop.setText("Start")
     
     def updateDrinkWater(self):
@@ -46,5 +39,4 @@ class MainWindow(QWidget):
 app = QApplication(sys.argv)
 window = MainWindow()
 window.show()
-
 sys.exit(app.exec())
