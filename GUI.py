@@ -1,5 +1,4 @@
 import sys
-#hi sydney
 
 from PyQt6.QtCore import QSize, Qt
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget
@@ -19,21 +18,24 @@ class MainWindow(QWidget):
         self.startstop.clicked.connect(self.updateStartStop)
         layout.addWidget(self.startstop)
 
-        drinkwater = QPushButton("Drink water = true")
+        self.drinkwater = QPushButton("Drink Water Alarm is off")
+        self.drinkwater.clicked.connect(self.updateDrinkWater)
+        layout.addWidget(self.drinkwater)
 
         pause = QPushButton("Pause")
-        layout.addWidget(drinkwater)
         layout.addWidget(pause)
-
-        # startstop.move(50,50)
-        # drinkwater.move(250,50)
-        # pause.move(50,250)
 
     def updateStartStop(self):
         if (self.startstop.text() == "Start"):
             self.startstop.setText("Stop")
         else:
             self.startstop.setText("Start")
+    
+    def updateDrinkWater(self):
+        if (self.drinkwater.text() == "Drink Water Alarm is off"):
+            self.drinkwater.setText("Drink Water Alarm is set! Click again to reset.")
+        else: 
+            self.drinkwater.setText("Drink Water Alarm is off")
 
 app = QApplication(sys.argv)
 window = MainWindow()
