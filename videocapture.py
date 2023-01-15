@@ -1,6 +1,7 @@
 import cv2
 import time
 import database #get classes defined from our database file
+import winsound
 
 # Load the cascade
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
@@ -41,7 +42,10 @@ def Studying(currentSession, start_time): #once study session is started (start 
         #timer for testing - simulates someone pressing stop after x seconds (will be swapped to button later so dw about this)
         if time.time() > timeout:
             isStudying = False#stop studying loop
-        
+        watervalue = 2 #Seconds
+        if (int((time.time())+1) % watervalue == 0):
+            winsound.PlaySound("New Recording 2", winsound.SND_FILENAME)
+            # time.sleep(1)
         # Read the frame
         _, img = cap.read()
 
