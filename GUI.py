@@ -15,6 +15,7 @@ class MainWindow(QWidget):
         layout = QVBoxLayout()
         self.setLayout(layout)
         
+
         self.startstop = QPushButton("Start")
         self.startstop.clicked.connect(self.updateStartStop)
         layout.addWidget(self.startstop)
@@ -28,12 +29,15 @@ class MainWindow(QWidget):
 
     def updateStartStop(self):
         videocapture.flip() #flipping on the back-end 
-        
+        print(videocapture._ss_value())
         #visual front -end stuff
         if (self.startstop.text() == "Start"):
-            videocapture.backend()
+            while videocapture._ss_value():
+                videocapture.backend()
             self.startstop.setText("Stop")
         else:
+            
+            
             self.startstop.setText("Start")
     
     def updateDrinkWater(self):
@@ -41,10 +45,9 @@ class MainWindow(QWidget):
             self.drinkwater.setText("Drink Water Alarm is set! Click again to reset.")
         else: 
             self.drinkwater.setText("Drink Water Alarm is off")
+def showingWindow():
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
 
-app = QApplication(sys.argv)
-window = MainWindow()
-
-window.show()
-
-sys.exit(app.exec())
+    sys.exit(app.exec())
