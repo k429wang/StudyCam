@@ -12,7 +12,7 @@ StudyCam uses your webcam to track how long you've been studying, and uses compu
 
 ## How we built it
 
-Python, OpenCV, Flask
+Python, OpenCV, PyQt6
 
 1. The user starts the program by clicking "start" on the GUI
 2. StudyCam starts to keep track of the user's body and head using OpenCV face detection technologies
