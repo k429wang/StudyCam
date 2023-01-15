@@ -3,9 +3,10 @@ import sys
 from PyQt6.QtCore import QSize, Qt
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget
 #from layout_colorwidget import Color
-
+import videocapture
 # Subclass QMainWindow to customize your application's main window
 class MainWindow(QWidget):
+    
     def __init__(self):
         super().__init__()
         self.resize(600,400)
@@ -13,7 +14,7 @@ class MainWindow(QWidget):
 
         layout = QVBoxLayout()
         self.setLayout(layout)
-
+        
         self.startstop = QPushButton("Start")
         self.startstop.clicked.connect(self.updateStartStop)
         layout.addWidget(self.startstop)
@@ -26,7 +27,11 @@ class MainWindow(QWidget):
         layout.addWidget(pause)
 
     def updateStartStop(self):
+        videocapture.flip() #flipping on the back-end 
+        
+        #visual front -end stuff
         if (self.startstop.text() == "Start"):
+            videocapture.backend()
             self.startstop.setText("Stop")
         else:
             self.startstop.setText("Start")
@@ -39,5 +44,7 @@ class MainWindow(QWidget):
 
 app = QApplication(sys.argv)
 window = MainWindow()
+
 window.show()
+
 sys.exit(app.exec())
