@@ -4,6 +4,7 @@ from time import time
 
 class StudySession:
     def __init__(self): 
+        #only run first time
         self.startTime  = time()
         self.time =0
         self.timesAFK = 0
