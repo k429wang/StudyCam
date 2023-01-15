@@ -55,11 +55,10 @@ def Studying(currentSession, start_time): #once study session is started (start 
         
         #atDesk: true = at desk, false = not at desk (past 10 seconds buffer)
         if (type(faces) == tuple): 
-            if (time.time()-left_time > 3):
+            if (time.time()-left_time > 2):
                 atDesk = False #left 
             else:
                 atDesk =  True
-        
         else :
             left_time = time.time()
             atDesk = True
@@ -70,8 +69,8 @@ def Studying(currentSession, start_time): #once study session is started (start 
         else:
             if (toggle == False):
                 AFKcounter += 1 #we have changed from present to gone
-                print("gone")
-             # toggle = True #gone
+                print("Hey! Get back to work!")
+            toggle = True #gone
            
 
 def flip():

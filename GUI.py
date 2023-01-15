@@ -21,7 +21,6 @@ class MainWindow(QWidget):
     def updateStartStop(self):
 
         if (self.startstop.text() == "Start"):
-            self.startstop.setText("Studying...")
             videocapture.backend()
         else:
             self.startstop.setText("Start")
