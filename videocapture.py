@@ -40,7 +40,7 @@ def Studying(currentSession, start_time): #once study session is started (start 
     session = currentSession
     
     AFKcounter= 0 
-    x = 17
+    x = 20
     timeout = time.time()+x
     
    
