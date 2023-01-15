@@ -18,23 +18,19 @@ class MainWindow(QWidget):
         self.startstop.clicked.connect(self.updateStartStop)
         layout.addWidget(self.startstop)
 
-        self.drinkwater = QPushButton("Drink Water Alarm is off")
-        self.drinkwater.clicked.connect(self.updateDrinkWater)
-        layout.addWidget(self.drinkwater)
-
     def updateStartStop(self):
 
         if (self.startstop.text() == "Start"):
+            self.startstop.setText("Studying...")
             videocapture.backend()
-            self.startstop.setText("Stop")
         else:
             self.startstop.setText("Start")
     
     def updateDrinkWater(self):
-        if (self.drinkwater.text() == "Drink Water Alarm is off"):
-            self.drinkwater.setText("Drink Water Alarm is set! Click again to reset.")
+        if (self.drinkwater.text() == "stress"):
+            self.drinkwater.setText("time to work!")
         else: 
-            self.drinkwater.setText("Drink Water Alarm is off")
+            self.drinkwater.setText("Go back to work")
 
 app = QApplication(sys.argv)
 window = MainWindow()

@@ -40,7 +40,7 @@ def Studying(currentSession, start_time): #once study session is started (start 
         #timer for testing - simulates someone pressing stop after x seconds (will be swapped to button later so dw about this)
            break#stop studying loop
              
-        watervalue = 10 #1800 Seconds = reminder every 30m to drink water
+        watervalue = 15 #1800 Seconds = reminder every 30m to drink water
         if (int((time.time())+1) % watervalue == 0):
             winsound.PlaySound("New Recording 2", winsound.SND_FILENAME) #playing sound
             
@@ -66,12 +66,13 @@ def Studying(currentSession, start_time): #once study session is started (start 
         
         if (atDesk):
             toggle = False #present at desk
-            print(faces)
+            #print(faces)
         else:
             if (toggle == False):
                 AFKcounter += 1 #we have changed from present to gone
-            toggle = True #gone
-            print("gone")
+                print("gone")
+             # toggle = True #gone
+           
 
 def flip():
     global isStudying

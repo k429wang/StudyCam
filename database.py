@@ -19,4 +19,5 @@ class StudySession:
         return self.startTime
     def output(self):
         #output parameters to terminal, used for testing/debugging pruposes
-        print(f'Start Time: {self.startTime}, End Time: {self.endTime}, Session Duration: {self.time}, times AFK {self.timesAFK}')
+        #print(f'Start Time: {self.startTime}, End Time: {self.endTime}, Session Duration: {self.time}, times AFK {self.timesAFK}')
+        print(f'You are done Studying, you have been studying for  {self.time} seconds. You have taken {self.timesAFK} breaks during your study session! ')
