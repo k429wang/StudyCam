@@ -1,7 +1,7 @@
 #database
 
 from time import time
-
+import videocapture
 class StudySession:
     def __init__(self): 
         self.startTime  = time()

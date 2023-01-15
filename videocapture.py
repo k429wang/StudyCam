@@ -1,7 +1,7 @@
 import cv2
 import time
 from videodetection_modules.leftframe import leftframe
-
+import database #get classes defined from our database file
 # Load the cascade
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
@@ -12,7 +12,7 @@ cap = cv2.VideoCapture(0)
 def main():
     start_time = time.time()
     while True:
-        counter = 0
+        
         # Read the frame
         _, img = cap.read()
         # Convert to grayscale
@@ -21,18 +21,17 @@ def main():
         faces = face_cascade.detectMultiScale(gray, 1.2, 1)
         
         
-        x = leftframe(faces, time)
-        if not x:
-            start_time = time.time()
-        if (time.time() - start_time >= 5 ):
-            print("WHY ARENT UUUU HERE!!!1")
-        else:
+        atDesk =leftframe(faces, start_time) #true = at desk, false = not at desk (past 10 seconds buffer)
+        if (atDesk):
             print(faces)
+        else:
+           print("gone")
 
 
-        #  for (x, y, w, h) in faces:
-        #      cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
-        #  cv2.imshow('img',img)
+        
+        #for (x, y, w, h) in faces:
+        #     cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
+         #cv2.imshow('img',img)
 
         # Stop if escape key is pressed
         k = cv2.waitKey(30) & 0xff
