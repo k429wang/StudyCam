@@ -1,7 +1,7 @@
 import cv2
 import time
 from videodetection_modules.leftframe import leftframe
-
+import database #get classes defined from our database file
 # Load the cascade
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
@@ -9,10 +9,32 @@ face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 cap = cv2.VideoCapture(0)
 
 
+global isStudying 
+global currentSession
+isStudying = False
+
+startPressed = True #will be bound to GUI button later, set to True for testing
 def main():
-    start_time = time.time()
-    while True:
-        counter = 0
+    
+    currentSession = database.StudySession()
+    currentSession.startTime = time.time()
+    if startPressed: #start button pressed
+        isStudying = True
+        
+    Studying(currentSession, currentSession.getStartTime())
+    
+    currentSession.output
+    
+    
+    #exitting loop means stop pressed-> need to reset varriables and track data
+    AFKcouner = 0
+def Studying(currentSession, start_time): #once study session is started (start button pressed)
+    session = database.StudySession()
+    session = currentSession
+    
+    AFKcounter= 0
+    while True: #isStudying:
+        
         # Read the frame
         _, img = cap.read()
         # Convert to grayscale
@@ -21,27 +43,31 @@ def main():
         faces = face_cascade.detectMultiScale(gray, 1.2, 1)
         
         
-        x = leftframe(faces, time)
-        if not x:
-            start_time = time.time()
-        if (time.time() - start_time >= 5 ):
-            print("WHY ARENT UUUU HERE!!!1")
-        else:
+        atDesk =leftframe(faces, start_time) #true = at desk, false = not at desk (past 10 seconds buffer)
+        if (atDesk):
             print(faces)
+        else:
+            print("gone")
+            AFKcounter+=1
 
 
-        #  for (x, y, w, h) in faces:
-        #      cv2.rectangle(img, (x, y), (x+w, y+h), (255, 0, 0), 2)
-        #  cv2.imshow('img',img)
-
-        # Stop if escape key is pressed
         k = cv2.waitKey(30) & 0xff
         if k==27:
             break
         #time.sleep(1)
     # Release the VideoCapture object
+
+        
     cap.release()
     cv2.destroyAllWindows()
+        
+        
+    #excited while loop -> studying is done  time to record data
+    currentSession.finished(AFKcounter) 
+    #return currentSession
+        
+    
+
 
 if __name__ == "__main__":
     main()
