@@ -4,7 +4,7 @@ import StudySession
 import winsound
 
 # Load the cascade
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+face_cascade = cv2.CascadeClassifier('assets/haarcascade_frontalface_default.xml')
 
 # Capture video from webcam. 
 cap = cv2.VideoCapture(0)
@@ -37,7 +37,7 @@ def Studying(start_time): #once study session is started (start button pressed)
              
         watervalue = 15 #frequency timer to remind user to drink water
         if (int((time.time())+1) % watervalue == 0):
-            winsound.PlaySound("recording", winsound.SND_FILENAME) #playing sound
+            winsound.PlaySound("assets/recording", winsound.SND_FILENAME) #playing sound
             
         # Read the frame
         _, img = cap.read()
