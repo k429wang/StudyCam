@@ -3,7 +3,6 @@ import sys
 from PyQt6.QtWidgets import QApplication, QPushButton, QVBoxLayout, QWidget
 import videocapture
 
-# Subclass QMainWindow to customize your application's main window
 class MainWindow(QWidget):
     
     def __init__(self):
@@ -19,19 +18,13 @@ class MainWindow(QWidget):
         layout.addWidget(self.startstop)
 
     def updateStartStop(self):
-
         if (self.startstop.text() == "Start"):
             videocapture.backend()
         else:
             self.startstop.setText("Start")
     
-    def updateDrinkWater(self):
-        if (self.drinkwater.text() == "stress"):
-            self.drinkwater.setText("time to work!")
-        else: 
-            self.drinkwater.setText("Go back to work")
-
-app = QApplication(sys.argv)
-window = MainWindow()
-window.show()
-sys.exit(app.exec())
+def runGUI():
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec())

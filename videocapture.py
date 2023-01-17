@@ -1,48 +1,43 @@
 import cv2
 import time
-import database #get classes defined from our database file
+import StudySession 
 import winsound
 
 # Load the cascade
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
-# To capture video from webcam. 
+# Capture video from webcam. 
 cap = cv2.VideoCapture(0)
 
 def backend():
-    isStudying = True
-    #global isStudying #boolean to test if in session
+    #global isStudying boolean to test if in session
     global currentSession
-    currentSession = database.StudySession() #__init__
-    Studying(currentSession, currentSession.getStartTime())
+    currentSession = StudySession.StudySession() #__init__
+    Studying(currentSession.getStartTime())
     currentSession.finished(AFKcounter) 
-    currentSession.output()#testing purposes: outputs data to terminal 
+    currentSession.output()
         
     # Release the VideoCapture object
     cap.release()
     cv2.destroyAllWindows()
       
 
-def Studying(currentSession, start_time): #once study session is started (start button pressed)
+def Studying(start_time): #once study session is started (start button pressed)
     global isStudying , AFKcounter
     left_time = start_time
     
-    session = database.StudySession()
-    session = currentSession
-    
     AFKcounter = 0 
-    x = 20
+    x = 30
     timeout = time.time() + x
     
     toggle = False #toggles between gone and not gone. When we go from True(gone) to False(present), AFK counter goes up
     while True:
         if time.time()>timeout:
-        #timer for testing - simulates someone pressing stop after x seconds (will be swapped to button later so dw about this)
-           break#stop studying loop
+           break #stop studying loop
              
-        watervalue = 15 #1800 Seconds = reminder every 30m to drink water
+        watervalue = 15 #frequency timer to remind user to drink water
         if (int((time.time())+1) % watervalue == 0):
-            winsound.PlaySound("New Recording 2", winsound.SND_FILENAME) #playing sound
+            winsound.PlaySound("recording", winsound.SND_FILENAME) #playing sound
             
         # Read the frame
         _, img = cap.read()
@@ -53,7 +48,7 @@ def Studying(currentSession, start_time): #once study session is started (start 
         # Detect face
         faces = face_cascade.detectMultiScale(gray, 1.2, 1)
         
-        #atDesk: true = at desk, false = not at desk (past 10 seconds buffer)
+        #atDesk: true = at desk, false = not at desk (past 2 second buffer)
         if (type(faces) == tuple): 
             if (time.time()-left_time > 2):
                 atDesk = False #left 
@@ -65,17 +60,8 @@ def Studying(currentSession, start_time): #once study session is started (start 
         
         if (atDesk):
             toggle = False #present at desk
-            #print(faces)
         else:
             if (toggle == False):
                 AFKcounter += 1 #we have changed from present to gone
                 print("Hey! Get back to work!")
             toggle = True #gone
-           
-
-def flip():
-    global isStudying
-    isStudying = True
-
-def _ss_value(): #pass isStudying val
-    return isStudying

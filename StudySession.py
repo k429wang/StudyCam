@@ -6,7 +6,7 @@ class StudySession:
         self.startTime = time()
         self.time = 0
         self.timesAFK = 0
-        #can add modules here
+        #can add more modules here
     
     def finished(self, AFKcounter):
         #session is finished, record needed info to the study session
@@ -17,7 +17,7 @@ class StudySession:
     def getStartTime(self):
         #return start time
         return self.startTime
+        
     def output(self):
         #output parameters to terminal, used for testing/debugging pruposes
-        #print(f'Start Time: {self.startTime}, End Time: {self.endTime}, Session Duration: {self.time}, times AFK {self.timesAFK}')
-        print(f'You are done Studying, you have been studying for  {self.time} seconds. You have taken {self.timesAFK} breaks during your study session! ')
+        print(f'You are done Studying, you have been studying for {self.time} seconds. You have taken {self.timesAFK} breaks during your study session! ')
